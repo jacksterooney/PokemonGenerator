@@ -1,10 +1,12 @@
+import os
 import sqlite3
 from sqlite3 import Error
-import os
 
 
 def create_pokedb_connection():
-    return create_connection(os.getcwd() + r"\pokedb.db")
+    database = os.path.dirname(os.path.realpath(__file__)) + r"\pokedb.db"
+    print("Creating connection to " + database)
+    return create_connection(database)
 
 
 def create_connection(db_file):
