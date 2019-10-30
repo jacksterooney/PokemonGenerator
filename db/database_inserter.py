@@ -21,7 +21,8 @@ def populate_pokemon():
         # Loop over all pokemon ids
         for i in range(1, 808):
             pokemon = pokeapi_collector.get_pokemon(i)
-            print("Inserting " + pokemon[0])
+            percent_complete = str(float("{0:.2f}".format((i/808) * 100)))
+            print("Inserting " + pokemon[0] + " - " + percent_complete + "% complete")
             insert_pokemon(conn, pokemon)
 
 

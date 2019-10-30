@@ -15,8 +15,11 @@ def get_pokemon(pokemon_id):
 
     flavor_text = None
     for entry in flavor_text_entries:
+        # Filter for english text
         if entry.language.name == 'en':
-            flavor_text = entry.flavor_text
+            # Remove line breaks, replace with space
+            spaced_flavor_text = str(entry.flavor_text).replace('\n', ' ').replace('\r', '')
+            flavor_text = spaced_flavor_text
             break
 
     if flavor_text is None:
@@ -32,5 +35,5 @@ def get_pokemon_sprite(pokemon_id):
 
 
 if __name__ == '__main__':
-    print(get_pokemon(1))
-    print(get_pokemon_sprite(1))
+    print(get_pokemon(22))
+    print(get_pokemon_sprite(22))

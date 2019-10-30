@@ -81,8 +81,8 @@ def generate_name():
     names = select_all_names()
     chain = build_markov_chain(names, 3)
     name = generate(chain)
-    print(name)
+    return name
 
 
 if __name__ == "__main__":
-    generate_name()
+    print(generate_name())
