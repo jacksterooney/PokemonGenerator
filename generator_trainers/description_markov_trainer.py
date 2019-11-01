@@ -38,13 +38,7 @@ def generate_and_save_description():
         json.dump(model_json, output_file)
 
 
-def generate_description(name):
-
-    # Load data from json
-    with open("resources/description_markov_json.txt") as input_file:
-        data = json.loads(input_file.read())
-        model = markovify.Text.from_json(data)
-
+def generate_description(name, model):
     min_description_length = 100
     max_sentence_length = 300
 
@@ -57,11 +51,9 @@ def generate_description(name):
             sentence += new_sentence + " "
 
     sentence = sentence.replace("<POKEMON>", str(name))
-
-    print(name)
-    print(sentence)
+    return sentence
 
 
 if __name__ == "__main__":
-    generate_and_save_description()
+    # generate_and_save_description()
     generate_description(name_markov_trainer.generate_name())
