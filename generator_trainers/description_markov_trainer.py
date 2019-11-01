@@ -22,7 +22,7 @@ def select_all_descriptions():
             # Replace instances of the pokemon name with a keyword
             description = description.replace('♂', '')
             description = description.replace('♀', '')
-            description = description.replace(str(name).capitalize(), "<POKEMON>")
+            description = description.replace(name, "<POKEMON>").replace(str(name).capitalize(), "<POKEMON>")
 
             description_string += description + " "
 
@@ -45,8 +45,8 @@ def generate_description(name):
         data = json.loads(input_file.read())
         model = markovify.Text.from_json(data)
 
-    min_description_length = 64
-    max_sentence_length = 226
+    min_description_length = 100
+    max_sentence_length = 300
 
     sentence = ""
     while len(sentence) < min_description_length:
