@@ -51,19 +51,16 @@ def generate_description(name, model):
             sentence += new_sentence + " "
 
     sentence = sentence.replace("<POKEMON>", str(name))
+
+    sentence.replace("- ", "")  # Shitty patch for hyphens being generated in descriptions
     return sentence
 
 
 def load_description_model():
 
     # Load data from json
-    with open("resources/description_markov_json.txt") as input_file:
+    with open("generator_trainers/resources/description_markov_json.txt") as input_file:
         data = json.loads(input_file.read())
         model = markovify.Text.from_json(data)
 
     return model
-
-
-if __name__ == "__main__":
-    description = generate_description(name_markov_trainer.generate_name(), load_description_model())
-    print(description)

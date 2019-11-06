@@ -1,4 +1,7 @@
+import sqlite3
+
 import pokebase as pb
+import requests
 
 
 def get_pokemon(pokemon_id):
@@ -45,7 +48,13 @@ def get_flavor_text(pokemon_id, name):
 
 
 def get_pokemon_sprite(pokemon_id):
-    sprite = pb.NamedAPIResource('pokemon', pokemon_id).sprites.front_default
+    sprite_url = pb.NamedAPIResource('pokemon', pokemon_id).sprites.front_default
+    if sprite_url is None:
+        print('No forward facing sprite found for id ' + str(pokemon_id) + "!")
+        return None
+
+    response = requests.get(sprite_url, stream=True)
+    sprite = sqlite3.Binary(response.content)
     return sprite
 
 
